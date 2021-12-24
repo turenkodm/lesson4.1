@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,11 +31,34 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('TEXT'),
-      ),
-      body: Center(
-        child: Column(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            Padding(
+              padding: EdgeInsets.only(left: 88.0),
+              child: Image(
+                image: AssetImage('assets/images/img.png'),
+              ),
+            ),
+            SizedBox(
+              height: 33.0,
+            ),
+            Text(
+              'Калькулятор пиццы',
+              style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 9.0,
+            ),
+            Text(
+              'Выберите параметры:',
+              style: TextStyle(fontSize: 19.0),
+            ),
+            SizedBox(
+              height: 33.0,
+            ),
+          ],
+        ),
       ),
     );
   }
