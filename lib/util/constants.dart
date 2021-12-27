@@ -25,7 +25,6 @@ const Color normalDoughColor = Colors.black54;
 const double doughHeight = 40.0;
 const double regularDoughAlign = -1;
 const double thinDoughAlign = 1;
-const int _primaryColorValue = 0xFF0079D0;
 
 //Images
 const headerImage = 'assets/images/img.png';
