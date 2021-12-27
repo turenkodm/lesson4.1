@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../order_page.dart';
@@ -10,11 +9,13 @@ class CustomRadio extends StatefulWidget {
     required this.sauce,
     required this.val,
     required this.onChanged,
+    required this.subtitle,
   }) : super(key: key);
   final String text;
   final Sauce sauce;
   final Sauce? val;
   final Function(Sauce?) onChanged;
+  final String subtitle;
 
   @override
   _CustomRadioState createState() => _CustomRadioState();
@@ -28,6 +29,7 @@ class _CustomRadioState extends State<CustomRadio> {
     return Column(
       children: [
         RadioListTile<Sauce>(
+          subtitle: Text(widget.subtitle),
           activeColor: const Color(0xFF5DB075),
           controlAffinity: ListTileControlAffinity.trailing,
           title: Text(widget.text),

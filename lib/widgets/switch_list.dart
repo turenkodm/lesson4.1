@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../order_page.dart';
+
 class SwitchList extends StatefulWidget {
   const SwitchList({Key? key}) : super(key: key);
 
@@ -12,6 +14,7 @@ class _SwitchListState extends State<SwitchList> {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile(
+      subtitle: const Text('+60₽'),
       secondary: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Image.asset("assets/images/cheese.png"),
@@ -24,8 +27,22 @@ class _SwitchListState extends State<SwitchList> {
       onChanged: (bool value) {
         setState(() {
           _addCheese = value;
+          if (value == true) {
+            OrderPage.cheesePrice = 60.00;
+          } else {
+            OrderPage.cheesePrice = 0.00;
+          }
+          sum();
         });
       },
     );
+  }
+
+  void sum() {
+    OrderPage.sum = OrderPage.doughPrice +
+        OrderPage.pizzaSizePrice +
+        OrderPage.saucePrice +
+        OrderPage.cheesePrice;
+    OrderPage.text = OrderPage.sum.toStringAsFixed(2);
   }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/order_page.dart';
 import 'package:pizza_app/util/constants.dart';
 
 class DoughStack extends StatefulWidget {
-  const DoughStack({Key? key}) : super(key: key);
+  const DoughStack({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _DoughStackState createState() => _DoughStackState();
@@ -40,6 +43,8 @@ class _DoughStackState extends State<DoughStack> {
         GestureDetector(
           onTap: () {
             setState(() {
+              OrderPage.doughPrice = 0.00;
+              sum();
               _xAlign = regularDoughAlign;
               _regularColor = selectedDoughColor;
               _thinColor = normalDoughColor;
@@ -64,6 +69,8 @@ class _DoughStackState extends State<DoughStack> {
         GestureDetector(
           onTap: () {
             setState(() {
+              OrderPage.doughPrice = 100.00;
+              sum();
               _xAlign = thinDoughAlign;
               _thinColor = selectedDoughColor;
               _regularColor = normalDoughColor;
@@ -87,5 +94,13 @@ class _DoughStackState extends State<DoughStack> {
         ),
       ],
     );
+  }
+
+  void sum() {
+    OrderPage.sum = OrderPage.doughPrice +
+        OrderPage.pizzaSizePrice +
+        OrderPage.saucePrice +
+        OrderPage.cheesePrice;
+    OrderPage.text = OrderPage.sum.toStringAsFixed(2);
   }
 }
