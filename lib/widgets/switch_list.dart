@@ -15,10 +15,7 @@ class _SwitchListState extends State<SwitchList> {
   Widget build(BuildContext context) {
     return SwitchListTile(
       subtitle: const Text('+60₽'),
-      secondary: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Image.asset("assets/images/cheese.png"),
-      ),
+      secondary: Image.asset("assets/images/cheese.png"),
       title: const Text(
         'Дополнительный сыр',
         style: TextStyle(fontSize: 16.0, color: Color(0xFF263238)),

@@ -140,13 +140,13 @@ class _OrderPageState extends State<OrderPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18, 0),
+              padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18, 0),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
                   color: cheeseContainerColor,
                 ),
-                height: 56.0,
+                height: 72.0,
                 child: Listener(
                     onPointerUp: _updateSum, child: const SwitchList()),
               ),
