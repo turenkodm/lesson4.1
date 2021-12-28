@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,6 @@ class OrderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BorderRadius _radius = BorderRadius.circular(36.0);
-    final notifier = Provider.of<UpdateModel>(context, listen: false);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -83,23 +83,29 @@ class OrderPage extends StatelessWidget {
               height: 5.0,
             ),
             const SliderStack(),
-            CustomRadio(
-              text: 'Острый',
-              sauce: Sauce.spicy,
-              val: notifier.sauce,
-              subtitle: '+0₽',
+            Consumer<UpdateModel>(
+              builder: (_, notifier, __) => CustomRadio(
+                text: 'Острый',
+                sauce: Sauce.spicy,
+                val: notifier.sauce,
+                subtitle: '+0₽',
+              ),
             ),
-            CustomRadio(
-              text: 'Кисло-сладкий',
-              sauce: Sauce.sour,
-              val: notifier.sauce,
-              subtitle: '+50₽',
+            Consumer<UpdateModel>(
+              builder: (_, notifier, __) => CustomRadio(
+                text: 'Кисло-сладкий',
+                sauce: Sauce.sour,
+                val: notifier.sauce,
+                subtitle: '+50₽',
+              ),
             ),
-            CustomRadio(
-              text: 'Сырный',
-              sauce: Sauce.cheesy,
-              val: notifier.sauce,
-              subtitle: '+80₽',
+            Consumer<UpdateModel>(
+              builder: (_, notifier, __) => CustomRadio(
+                text: 'Сырный',
+                sauce: Sauce.cheesy,
+                val: notifier.sauce,
+                subtitle: '+80₽',
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18, 0),
@@ -128,10 +134,12 @@ class OrderPage extends StatelessWidget {
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 5.0),
-                  child: Text(
-                    '${notifier.summa().toStringAsFixed(2)} ₽',
-                    style: const TextStyle(fontSize: 19),
-                    textAlign: TextAlign.center,
+                  child: Consumer<UpdateModel>(
+                    builder: (_, notifier, __) => Text(
+                      '${notifier.summa().toStringAsFixed(2)} ₽',
+                      style: const TextStyle(fontSize: 19),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 height: 34.0,
@@ -146,20 +154,36 @@ class OrderPage extends StatelessWidget {
             ),
             Button(onPressed: () {
               showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('Заказ пиццы'),
-                  content: const Text('Заказ успешно сформирован'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, 'OK');
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ),
-              );
+                  context: context,
+                  builder: (BuildContext context) {
+                    if (Platform.isAndroid) {
+                      return AlertDialog(
+                        title: const Text('Заказ пиццы'),
+                        content: const Text('Заказ успешно сформирован'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context, 'OK');
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return CupertinoAlertDialog(
+                        title: const Text('Заказ пиццы'),
+                        content: const Text('Заказ успешно сформирован'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context, 'OK');
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    }
+                  });
             }),
           ],
         ),

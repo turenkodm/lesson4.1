@@ -16,5 +16,4 @@ class UpdateModel with ChangeNotifier{
     notifyListeners();
     return sum;
   }
-
 }

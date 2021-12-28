@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_app/util/constants.dart';
 import 'package:provider/provider.dart';
-
 import '../update_model.dart';
 
 class SliderStack extends StatefulWidget {
-  const SliderStack({Key? key}) : super(key: key);
+   const SliderStack({Key? key}) : super(key: key);
 
   @override
-  _SliderStackState createState() => _SliderStackState();
+  State<SliderStack> createState() => _SliderStackState();
 }
 
 class _SliderStackState extends State<SliderStack> {
   double _currentVal = 1;
   String _pizzaSize = 'Средняя';
+
   @override
   Widget build(BuildContext context) {
-    final notifier = Provider.of<UpdateModel>(context);
     return Stack(
       children: [
         Padding(
@@ -26,9 +25,11 @@ class _SliderStackState extends State<SliderStack> {
             child: Center(
                 child: Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                _pizzaSize,
-                style: const TextStyle(fontSize: 20, color: primaryColor),
+              child: Consumer<UpdateModel>(
+                builder: (_, notifier, __) => Text(
+                  _pizzaSize,
+                  style: const TextStyle(fontSize: 20, color: primaryColor),
+                ),
               ),
             )),
             decoration: BoxDecoration(
@@ -51,26 +52,26 @@ class _SliderStackState extends State<SliderStack> {
                 enabledThumbRadius: 5,
               ),
             ),
-            child: Slider(
-              max: 2,
-              divisions: 2,
-              value: _currentVal,
-              onChanged: (double value) {
-                setState(() {
-                  if (value == 0) {
-                    _pizzaSize = 'Маленькая';
-                    notifier.pizzaSizePrice = 200.0;
-                  } else if (value == 1) {
-                    _pizzaSize = 'Средняя';
-                    notifier.pizzaSizePrice = 350.0;
-                  } else {
-                    _pizzaSize = 'Большая';
-                    notifier.pizzaSizePrice = 500.0;
-                  }
-                  notifier.summa();
-                  _currentVal = value;
-                });
-              },
+            child: Consumer<UpdateModel>(
+              builder: (_, notifier, __) => Slider(
+                max: 2,
+                divisions: 2,
+                value: _currentVal,
+                onChanged: (double value) {
+                    if (value == 0) {
+                      _pizzaSize = 'Маленькая';
+                      notifier.pizzaSizePrice = 200.0;
+                    } else if (value == 1) {
+                      _pizzaSize = 'Средняя';
+                      notifier.pizzaSizePrice = 350.0;
+                    } else {
+                      _pizzaSize = 'Большая';
+                      notifier.pizzaSizePrice = 500.0;
+                    }
+                    notifier.summa();
+                    _currentVal = value;
+                },
+              ),
             ),
           ),
         ),

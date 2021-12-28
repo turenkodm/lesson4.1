@@ -20,7 +20,7 @@ class CustomRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notifier = Provider.of<UpdateModel>(context);
+    final notifier = Provider.of<UpdateModel>(context, listen: false);
     return Column(
       children: [
         RadioListTile<Sauce>(

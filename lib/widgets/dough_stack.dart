@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/util/constants.dart';
 import 'package:provider/provider.dart';
-
 import '../update_model.dart';
 
 class DoughStack extends StatefulWidget {

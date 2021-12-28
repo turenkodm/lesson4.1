@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pizza_app/update_model.dart';
 import 'package:pizza_app/order_page.dart';
 import 'package:pizza_app/util/constants.dart';
@@ -6,6 +7,9 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
 }
 
 class MyApp extends StatelessWidget {
