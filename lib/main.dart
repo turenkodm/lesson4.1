@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/update_model.dart';
 import 'package:pizza_app/order_page.dart';
 import 'package:pizza_app/util/constants.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: primaryColor,
       ),
-      home: const OrderPage(),
+      home: ChangeNotifierProvider<UpdateModel>(create: (BuildContext context) => UpdateModel(),
+      child:  const OrderPage()),
     );
   }
 }

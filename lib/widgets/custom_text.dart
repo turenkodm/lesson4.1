@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText(
@@ -20,10 +21,11 @@ class CustomText extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.roboto(
+            textStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: fontWeight,
-        ),
+        )),
       ),
     );
   }

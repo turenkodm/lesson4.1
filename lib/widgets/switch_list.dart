@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../order_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:pizza_app/update_model.dart';
+import 'package:provider/provider.dart';
 
 class SwitchList extends StatefulWidget {
   const SwitchList({Key? key}) : super(key: key);
@@ -10,36 +11,29 @@ class SwitchList extends StatefulWidget {
 }
 
 class _SwitchListState extends State<SwitchList> {
-  bool _addCheese = false;
   @override
   Widget build(BuildContext context) {
+    final notifier = Provider.of<UpdateModel>(context);
     return SwitchListTile(
       subtitle: const Text('+60₽'),
       secondary: Image.asset("assets/images/cheese.png"),
-      title: const Text(
+      title: Text(
         'Дополнительный сыр',
-        style: TextStyle(fontSize: 16.0, color: Color(0xFF263238)),
+        style: GoogleFonts.inter(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF263238),
+            )),
       ),
-      value: _addCheese,
+      value: notifier.addCheese,
       onChanged: (bool value) {
         setState(() {
-          _addCheese = value;
-          if (value == true) {
-            OrderPage.cheesePrice = 60.00;
-          } else {
-            OrderPage.cheesePrice = 0.00;
-          }
-          sum();
+          notifier.addCheese = value;
+          value ? {notifier.cheesePrice = 60} : {notifier.cheesePrice = 0};
+          notifier.summa();
         });
       },
     );
-  }
-
-  void sum() {
-    OrderPage.sum = OrderPage.doughPrice +
-        OrderPage.pizzaSizePrice +
-        OrderPage.saucePrice +
-        OrderPage.cheesePrice;
-    OrderPage.text = OrderPage.sum.toStringAsFixed(2);
   }
 }

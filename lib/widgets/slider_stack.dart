@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_app/order_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_app/util/constants.dart';
+import 'package:provider/provider.dart';
+
+import '../update_model.dart';
 
 class SliderStack extends StatefulWidget {
   const SliderStack({Key? key}) : super(key: key);
@@ -14,6 +17,7 @@ class _SliderStackState extends State<SliderStack> {
   String _pizzaSize = 'Средняя';
   @override
   Widget build(BuildContext context) {
+    final notifier = Provider.of<UpdateModel>(context);
     return Stack(
       children: [
         Padding(
@@ -55,42 +59,33 @@ class _SliderStackState extends State<SliderStack> {
                 setState(() {
                   if (value == 0) {
                     _pizzaSize = 'Маленькая';
-                    OrderPage.pizzaSizePrice = 250.00;
-                    sum();
+                    notifier.pizzaSizePrice = 200.0;
                   } else if (value == 1) {
                     _pizzaSize = 'Средняя';
-                    OrderPage.pizzaSizePrice = 450.00;
-                    sum();
+                    notifier.pizzaSizePrice = 350.0;
                   } else {
                     _pizzaSize = 'Большая';
-                    OrderPage.pizzaSizePrice = 650.00;
-                    sum();
+                    notifier.pizzaSizePrice = 500.0;
                   }
+                  notifier.summa();
                   _currentVal = value;
                 });
               },
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(10, 47, 0, 0),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 47, 0, 0),
           child: Text(
             'Соус:',
-            style: TextStyle(
+            style: GoogleFonts.inter(
+                textStyle: const TextStyle(
               fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+              fontWeight: FontWeight.w600,
+            )),
           ),
         ),
       ],
     );
-  }
-
-  void sum() {
-    OrderPage.sum = OrderPage.doughPrice +
-        OrderPage.pizzaSizePrice +
-        OrderPage.saucePrice +
-        OrderPage.cheesePrice;
-    OrderPage.text = OrderPage.sum.toStringAsFixed(2);
   }
 }

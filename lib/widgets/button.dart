@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Button extends StatelessWidget {
   Button({Key? key, required this.onPressed}) : super(key: key);
@@ -12,11 +13,15 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 83.0),
+      padding: const EdgeInsets.fromLTRB(83.0, 0, 83.0, 30),
       child: ElevatedButton(
         style: _buttonStyle,
         onPressed: onPressed,
-        child: const Text('Заказать'),
+        child: Text(
+          'Заказать',
+          style: GoogleFonts.roboto(
+              textStyle: const TextStyle(fontWeight: FontWeight.w500)),
+        ),
       ),
     );
   }
