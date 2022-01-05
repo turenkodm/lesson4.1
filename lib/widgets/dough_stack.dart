@@ -22,9 +22,12 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () {
+      _regularColor = Colors.white;
+      _thinColor = Colors.black54;
+    });
     _xAlign = -1;
-    _regularColor = Colors.white;
-    _thinColor = Colors.black54;
+
   }
 
 
@@ -47,7 +50,7 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
                   width: MediaQuery.of(context).size.width * 0.5,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).splashColor,
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(36.0),
                   ),
                 ),
@@ -57,8 +60,8 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
                   notifier.summa();
                   notifier.doughPrice = 0.00;
                   _xAlign = -1;
-                  _regularColor = Theme.of(context).primaryColor;
-                  _thinColor = Theme.of(context).splashColor;
+                  _regularColor = Theme.of(context).cardColor;
+                  _thinColor = Theme.of(context).disabledColor;
                 },
                 child: Align(
                   alignment: const Alignment(-1, 0),
@@ -81,8 +84,8 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
                   notifier.doughPrice = 100.0;
                   notifier.summa();
                   _xAlign = 1;
-                  _thinColor = Colors.white;
-                  _regularColor = Colors.black54;
+                  _thinColor = Theme.of(context).cardColor;
+                  _regularColor = Theme.of(context).disabledColor;
                 },
                 child: Align(
                   alignment: const Alignment(1, 0),

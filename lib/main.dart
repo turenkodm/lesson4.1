@@ -22,11 +22,16 @@ class MyApp extends StatelessWidget {
         toggleableActiveColor: Colors.lightGreenAccent,
         brightness: Brightness.dark,
         primaryColor: Colors.white,
+        disabledColor: Colors.white,
+
       ),
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
-        toggleableActiveColor: Colors.lightGreenAccent,
+        toggleableActiveColor: Colors.lightGreen,
+        primaryColor: Colors.blue,
+        cardColor: Colors.white,
+        disabledColor: Colors.black54,
 
       ),
       home: ChangeNotifierProvider<UpdateModel>(create: (BuildContext context) => UpdateModel(),
