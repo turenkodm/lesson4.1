@@ -55,23 +55,9 @@ class OrderPage extends StatelessWidget {
                         fontSize: 16.9, fontWeight: FontWeight.w600)),
               ),
             ),
-            const SizedBox(
-              height: 33.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: doughHeight,
-                decoration: BoxDecoration(
-                  color: backgroundColor,
-                  borderRadius: _radius,
-                ),
-                child: const DoughStack(),
-              ),
-            ),
-            const SizedBox(
-              height: 19.0,
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: DoughStack(),
             ),
             const CustomText(
               text: 'Размер:',
@@ -112,7 +98,7 @@ class OrderPage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: cheeseContainerColor,
+                  color: Theme.of(context).splashColor,
                 ),
                 height: 72.0,
                 child: const SwitchList(),
@@ -145,49 +131,53 @@ class OrderPage extends StatelessWidget {
                 height: 34.0,
                 decoration: BoxDecoration(
                   borderRadius: _radius,
-                  color: backgroundColor,
+                  color: Theme.of(context).splashColor,
                 ),
               ),
             ),
             const SizedBox(
               height: 33.0,
             ),
-            Button(onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    if (Platform.isAndroid) {
-                      return AlertDialog(
-                        title: const Text('Заказ пиццы'),
-                        content: const Text('Заказ успешно сформирован'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context, 'OK');
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return CupertinoAlertDialog(
-                        title: const Text('Заказ пиццы'),
-                        content: const Text('Заказ успешно сформирован'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context, 'OK');
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    }
-                  });
-            }),
+            Button(
+              onPressed: () => buttonPressed(context),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void buttonPressed(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          if (Platform.isAndroid) {
+            return AlertDialog(
+              title: const Text('Заказ пиццы'),
+              content: const Text('Заказ успешно сформирован'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'OK');
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          } else {
+            return CupertinoAlertDialog(
+              title: const Text('Заказ пиццы'),
+              content: const Text('Заказ успешно сформирован'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'OK');
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          }
+        });
   }
 }

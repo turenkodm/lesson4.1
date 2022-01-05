@@ -25,7 +25,7 @@ class CustomRadio extends StatelessWidget {
       children: [
         RadioListTile<Sauce>(
           subtitle: Text(subtitle),
-          activeColor: const Color(0xFF5DB075),
+          activeColor: Theme.of(context).toggleableActiveColor,
           controlAffinity: ListTileControlAffinity.trailing,
           title: Text(
             text,

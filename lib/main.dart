@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pizza_app/update_model.dart';
 import 'package:pizza_app/order_page.dart';
-import 'package:pizza_app/util/constants.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,8 +18,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      darkTheme: ThemeData(
+        toggleableActiveColor: Colors.lightGreenAccent,
+        brightness: Brightness.dark,
+        primaryColor: Colors.white,
+      ),
       theme: ThemeData(
-        primarySwatch: primaryColor,
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+        toggleableActiveColor: Colors.lightGreenAccent,
+
       ),
       home: ChangeNotifierProvider<UpdateModel>(create: (BuildContext context) => UpdateModel(),
       child:  const OrderPage()),
