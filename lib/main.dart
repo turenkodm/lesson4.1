@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Colors.white,
         disabledColor: Colors.white,
+        cardColor: Colors.black,
 
       ),
       theme: ThemeData(

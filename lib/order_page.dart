@@ -55,7 +55,7 @@ class OrderPage extends StatelessWidget {
                         fontSize: 16.9, fontWeight: FontWeight.w600)),
               ),
             ),
-            const Padding(
+             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: DoughStack(),
             ),

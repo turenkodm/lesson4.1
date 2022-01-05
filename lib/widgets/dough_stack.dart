@@ -14,22 +14,17 @@ class DoughStack extends StatefulWidget {
 class _DoughStackState extends State<DoughStack> with RestorationMixin {
   RestorableInt currentSegment = RestorableInt(0);
 
-
   double _xAlign = 0;
-  Color _regularColor = Colors.white;
-  Color _thinColor = Colors.black54;
+  Color _regularColor = ThemeData().cardColor;
+  Color _thinColor = ThemeData().disabledColor;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      _regularColor = Colors.white;
-      _thinColor = Colors.black54;
-    });
+    _regularColor = ThemeData().cardColor;
+    _thinColor = ThemeData().disabledColor;
     _xAlign = -1;
-
   }
-
 
   Widget _doughType(BuildContext context) {
     final notifier = Provider.of<UpdateModel>(context);
@@ -41,76 +36,76 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
             height: 33.0,
           ),
           Container(
-          child: Stack(
-            children: [
-              AnimatedAlign(
-                alignment: Alignment(_xAlign, 0),
-                duration: const Duration(milliseconds: 200),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(36.0),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  notifier.summa();
-                  notifier.doughPrice = 0.00;
-                  _xAlign = -1;
-                  _regularColor = Theme.of(context).cardColor;
-                  _thinColor = Theme.of(context).disabledColor;
-                },
-                child: Align(
-                  alignment: const Alignment(-1, 0),
+            child: Stack(
+              children: [
+                AnimatedAlign(
+                  alignment: Alignment(_xAlign, 0),
+                  duration: const Duration(milliseconds: 200),
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.5,
-                    color: Colors.transparent,
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Обычное тесто',
-                      style: TextStyle(
-                        color: _regularColor,
-                        fontSize: 16.0,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(36.0),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    notifier.summa();
+                    notifier.doughPrice = 0.00;
+                    _xAlign = -1;
+                    _regularColor = Theme.of(context).cardColor;
+                    _thinColor = Theme.of(context).disabledColor;
+                  },
+                  child: Align(
+                    alignment: const Alignment(-1, 0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Обычное тесто',
+                        style: TextStyle(
+                          color: _regularColor,
+                          fontSize: 16.0,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  notifier.doughPrice = 100.0;
-                  notifier.summa();
-                  _xAlign = 1;
-                  _thinColor = Theme.of(context).cardColor;
-                  _regularColor = Theme.of(context).disabledColor;
-                },
-                child: Align(
-                  alignment: const Alignment(1, 0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    color: Colors.transparent,
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Тонкое тесто',
-                      style: TextStyle(
-                        color: _thinColor,
-                        fontSize: 16.0,
+                GestureDetector(
+                  onTap: () {
+                    notifier.doughPrice = 100.0;
+                    notifier.summa();
+                    _xAlign = 1;
+                    _thinColor = Theme.of(context).cardColor;
+                    _regularColor = Theme.of(context).disabledColor;
+                  },
+                  child: Align(
+                    alignment: const Alignment(1, 0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Тонкое тесто',
+                        style: TextStyle(
+                          color: _thinColor,
+                          fontSize: 16.0,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          width: MediaQuery.of(context).size.width,
-          height: 40,
-          decoration: BoxDecoration(
-          color: Theme.of(context).splashColor,
-          borderRadius: BorderRadius.circular(36.0),
-          ),
+              ],
+            ),
+            width: MediaQuery.of(context).size.width,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Theme.of(context).splashColor,
+              borderRadius: BorderRadius.circular(36.0),
+            ),
           ),
           const SizedBox(
             height: 19.0,
@@ -138,22 +133,21 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
       }
 
       return SizedBox(
-            width: segmentedControlMaxWidth,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: CupertinoSlidingSegmentedControl<int>(
-                children: children,
-                onValueChanged: onValueChanged,
-                groupValue: currentSegment.value,
-              ),
-            ),
-          );
+        width: segmentedControlMaxWidth,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: CupertinoSlidingSegmentedControl<int>(
+            children: children,
+            onValueChanged: onValueChanged,
+            groupValue: currentSegment.value,
+          ),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return _doughType(context);
   }
 
@@ -165,8 +159,3 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
     registerForRestoration(currentSegment, 'current_segment');
   }
 }
-
-
-
-
-
