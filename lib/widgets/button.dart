@@ -9,8 +9,7 @@ class Button extends StatelessWidget {
 
   final ButtonStyle _buttonStyle = ElevatedButton.styleFrom(
       minimumSize: const Size.fromHeight(42),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-      textStyle: const TextStyle(fontSize: 16.0));
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)));
   final VoidCallback onPressed;
 
   Widget _buttonType() {

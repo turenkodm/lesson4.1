@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/widgets/custom_gesture_detector.dart';
 import 'package:provider/provider.dart';
 import '../update_model.dart';
 
@@ -14,104 +15,91 @@ class DoughStack extends StatefulWidget {
 class _DoughStackState extends State<DoughStack> with RestorationMixin {
   RestorableInt currentSegment = RestorableInt(0);
 
-  double _xAlign = 0;
-  Color _regularColor = ThemeData().cardColor;
-  Color _thinColor = ThemeData().disabledColor;
-
-  @override
-  void initState() {
-    super.initState();
-    _regularColor = ThemeData().cardColor;
-    _thinColor = ThemeData().disabledColor;
-    _xAlign = -1;
-  }
-
   Widget _doughType(BuildContext context) {
     final notifier = Provider.of<UpdateModel>(context);
 
     if (Platform.isAndroid) {
-      return Column(
-        children: [
-          const SizedBox(
-            height: 33.0,
-          ),
-          Container(
-            child: Stack(
-              children: [
-                AnimatedAlign(
-                  alignment: Alignment(_xAlign, 0),
-                  duration: const Duration(milliseconds: 200),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(36.0),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    notifier.summa();
-                    notifier.doughPrice = 0.00;
-                    _xAlign = -1;
-                    _regularColor = Theme.of(context).cardColor;
-                    _thinColor = Theme.of(context).disabledColor;
-                  },
-                  child: Align(
-                    alignment: const Alignment(-1, 0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      color: Colors.transparent,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Обычное тесто',
-                        style: TextStyle(
-                          color: _regularColor,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    notifier.doughPrice = 100.0;
-                    notifier.summa();
-                    _xAlign = 1;
-                    _thinColor = Theme.of(context).cardColor;
-                    _regularColor = Theme.of(context).disabledColor;
-                  },
-                  child: Align(
-                    alignment: const Alignment(1, 0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      color: Colors.transparent,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Тонкое тесто',
-                        style: TextStyle(
-                          color: _thinColor,
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+      if (!notifier.selectedDough) {
+        return Column(
+          children: [
+            const SizedBox(
+              height: 33.0,
             ),
-            width: MediaQuery.of(context).size.width,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Theme.of(context).splashColor,
-              borderRadius: BorderRadius.circular(36.0),
+            Container(
+              child: Stack(
+                children: [
+                  animatedAlign(notifier, context),
+                  CustomGestureDetector(
+                    doughPrice: 0.00,
+                    xAlign: -1,
+                    selectedDough: false,
+                    align: -1,
+                    color: Theme.of(context).cardColor,
+                    doughText: 'Обычное тесто',
+                  ),
+                  CustomGestureDetector(
+                    doughPrice: 100.00,
+                    xAlign: 1,
+                    selectedDough: true,
+                    align: 1,
+                    color: Theme.of(context).disabledColor,
+                    doughText: 'Тонкое тесто',
+                  ),
+                ],
+              ),
+              width: MediaQuery.of(context).size.width,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Theme.of(context).splashColor,
+                borderRadius: BorderRadius.circular(36.0),
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 19.0,
-          ),
-        ],
-      );
+            const SizedBox(
+              height: 19.0,
+            ),
+          ],
+        );
+      } else {
+        return Column(
+          children: [
+            const SizedBox(
+              height: 33.0,
+            ),
+            Container(
+              child: Stack(
+                children: [
+                  animatedAlign(notifier, context),
+                  CustomGestureDetector(
+                    doughPrice: 0.00,
+                    xAlign: -1,
+                    selectedDough: false,
+                    align: -1,
+                    color: Theme.of(context).disabledColor,
+                    doughText: 'Обычное тесто',
+                  ),
+                  CustomGestureDetector(
+                    doughPrice: 100.00,
+                    xAlign: 1,
+                    selectedDough: true,
+                    align: 1,
+                    color: Theme.of(context).cardColor,
+                    doughText: 'Тонкое тесто',
+                  ),
+                ],
+              ),
+              width: MediaQuery.of(context).size.width,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Theme.of(context).splashColor,
+                borderRadius: BorderRadius.circular(36.0),
+              ),
+            ),
+            const SizedBox(
+              height: 19.0,
+            ),
+          ],
+        );
+      }
     } else {
       const segmentedControlMaxWidth = 500.0;
       final children = <int, Widget>{
@@ -144,6 +132,21 @@ class _DoughStackState extends State<DoughStack> with RestorationMixin {
         ),
       );
     }
+  }
+
+  AnimatedAlign animatedAlign(UpdateModel notifier, BuildContext context) {
+    return AnimatedAlign(
+      alignment: Alignment(notifier.xAlign, 0),
+      duration: const Duration(milliseconds: 200),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.5,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(36.0),
+        ),
+      ),
+    );
   }
 
   @override

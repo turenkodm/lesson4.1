@@ -29,11 +29,7 @@ class CustomRadio extends StatelessWidget {
           controlAffinity: ListTileControlAffinity.trailing,
           title: Text(
             text,
-            style: GoogleFonts.inter(
-                textStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            )),
+            style: GoogleFonts.inter(),
           ),
           value: sauce,
           groupValue: val,

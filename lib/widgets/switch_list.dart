@@ -28,7 +28,6 @@ class SwitchList extends StatelessWidget {
           'Дополнительный сыр',
           style: GoogleFonts.inter(
               textStyle: const TextStyle(
-                fontSize: 16,
                 fontWeight: FontWeight.w400,
               )),
         ),

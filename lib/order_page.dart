@@ -35,13 +35,10 @@ class OrderPage extends StatelessWidget {
             const SizedBox(
               height: 33.0,
             ),
-            Text(
-              'Калькулятор пиццы',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                      fontSize: 30.0, fontWeight: FontWeight.w600)),
-            ),
+            Text('Калькулятор пиццы',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                    textStyle: Theme.of(context).textTheme.headline1)),
             const SizedBox(
               height: 9.0,
             ),
@@ -51,8 +48,7 @@ class OrderPage extends StatelessWidget {
                 'Выберите параметры:',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                    textStyle: const TextStyle(
-                        fontSize: 16.9, fontWeight: FontWeight.w600)),
+                    textStyle: Theme.of(context).textTheme.headline2),
               ),
             ),
              const Padding(
@@ -62,8 +58,6 @@ class OrderPage extends StatelessWidget {
             const CustomText(
               text: 'Размер:',
               edgeInsets: 10.0,
-              fontSize: 19.0,
-              fontWeight: FontWeight.w400,
             ),
             const SizedBox(
               height: 5.0,
@@ -108,10 +102,9 @@ class OrderPage extends StatelessWidget {
               height: 10.0,
             ),
             const CustomText(
-                text: 'Стоимость:',
-                edgeInsets: 25.0,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w400),
+              text: 'Стоимость:',
+              edgeInsets: 25.0,
+            ),
             const SizedBox(
               height: 10.0,
             ),
