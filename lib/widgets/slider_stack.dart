@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../update_model.dart';
+import '../model/update_model.dart';
 
 class SliderStack extends StatefulWidget {
    const SliderStack({Key? key}) : super(key: key);

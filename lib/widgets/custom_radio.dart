@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pizza_app/update_model.dart';
+import 'package:pizza_app/model/update_model.dart';
 import 'package:provider/provider.dart';
 
-import '../order_page.dart';
+import '../pages/order_page.dart';
 
 class CustomRadio extends StatelessWidget {
   const CustomRadio({

@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pizza_app/update_model.dart';
+import 'package:pizza_app/model/update_model.dart';
 import 'package:pizza_app/util/constants.dart';
 import 'package:pizza_app/widgets/button.dart';
 import 'package:pizza_app/widgets/custom_radio.dart';

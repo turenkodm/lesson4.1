@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/widgets/custom_gesture_detector.dart';
 import 'package:provider/provider.dart';
-import '../update_model.dart';
+import '../model/update_model.dart';
 
 class DoughStack extends StatefulWidget {
   const DoughStack({Key? key}) : super(key: key);

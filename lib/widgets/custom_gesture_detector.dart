@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../update_model.dart';
+import '../model/update_model.dart';
 
 class CustomGestureDetector extends StatelessWidget {
   const CustomGestureDetector(

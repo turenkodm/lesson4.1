@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:pizza_app/order_page.dart';
+import 'package:pizza_app/pages/order_page.dart';
 
 class UpdateModel with ChangeNotifier {
   double sum = 0;
